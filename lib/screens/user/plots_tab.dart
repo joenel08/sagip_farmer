@@ -114,22 +114,9 @@ class _PlotsTabState extends State<PlotsTab> {
           ),
         ),
       ),
-      floatingActionButton: _plots.isEmpty
-          ? null
-          : FloatingActionButton.extended(
-              onPressed: _add,
-              backgroundColor: AppColors.green700,
-              foregroundColor: Colors.white,
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppRadius.pill),
-              ),
-              icon: const Icon(Icons.add),
-              label: const Text(
-                'Add Sensor',
-                style: TextStyle(fontWeight: FontWeight.w700),
-              ),
-            ),
+      // FAB removed — the "Add Sensor" action now lives in the header,
+      // so it is always visible (previously it was hidden behind the
+      // parent's bottom navigation bar).
     );
   }
 
@@ -153,14 +140,19 @@ class _PlotsTabState extends State<PlotsTab> {
               ],
             ),
           ),
+          // Always-visible "Add Sensor" button (replaces the old FAB
+          // and the decorative grass icon container).
           Container(
-            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               gradient: AppGradients.primary,
               borderRadius: BorderRadius.circular(16),
               boxShadow: AppShadows.sm,
             ),
-            child: const Icon(Icons.grass, color: Colors.white, size: 24),
+            child: IconButton(
+              onPressed: _add,
+              tooltip: 'Add Sensor',
+              icon: const Icon(Icons.add, color: Colors.white, size: 24),
+            ),
           ),
         ],
       ),
@@ -238,6 +230,13 @@ class _PlotsTabState extends State<PlotsTab> {
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 12),
+          // Database primary-key `id` from the plots table.
+          _detailItem(
+            Icons.tag,
+            'Unique ID (This will be used for hardware.)',
+            '#${p.id}',
           ),
         ],
       ),

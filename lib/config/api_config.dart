@@ -7,6 +7,8 @@ class ApiConfig {
   // Real phone (LAN)  -> http://192.168.x.x/sagipfarmer_api/api
   // ------------------------------------------------------------
   static const String baseUrl = "https://sagipfarmer.isuc-ccsict.com/api";
+  // static const String baseUrl = "http://10.87.229.154/sagipfarmer/api";
+
 
   // ---------------- AUTH ----------------
   static const String register = "$baseUrl/register.php";
